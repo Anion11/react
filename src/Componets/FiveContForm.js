@@ -42,11 +42,7 @@ var  arrComment = [
         Stars: 4,
         CommentText: "5555555555555555",
         UserImg: User,
-<<<<<<< HEAD
-        userName:"Jane Pope",
-=======
         userName:"Jane Pooooo",
->>>>>>> c07d672e58f7cb76cd5164cf3198b49a213dcc25
         userResidency: "Los Angeles, CA"
     }
 ];
