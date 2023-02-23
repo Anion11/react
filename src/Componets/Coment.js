@@ -25,16 +25,40 @@ export const Coment = props => {
     const userImg = props.UserImg;
     const userName = props.userName;
     const userResidency = props.userResidency;
-    const viewSymCount = 200;
+    const viewSymCount = 300;
     const spliceText = () => {
         var textSplice = ' ';
-        for(let i = 0; i < viewSymCount; i++)
+        var ok = true;
+        var i = 0;
+        while(i < viewSymCount && ok)
         {
-                textSplice += text[i];
+            if(i > viewSymCount - 50 && text[i + 1] === " ")
+            {
+                ok = false;
+            }
+            textSplice += text[i];
+            i++;
         }
         setCommentText(textSplice);
     }
     useEffect(() => {
+        const spliceText = () => {
+            var textSplice = ' ';
+            var ok = true;
+            var i = 0;
+            while(i < 300 && ok)
+            {
+                if(i > 250 && text[i + 1] === " ")
+                {
+                    ok = false;
+                }
+                textSplice += text[i];
+                i++;
+            }
+                    
+            
+            setCommentText(textSplice);
+        }
         setButtonFullText(false);
         if(text.length > viewSymCount)
         {  
@@ -62,24 +86,25 @@ export const Coment = props => {
    
         return( 
             <div className="fivesContainerFeedback">
-                <div className="fivesContainerFeedbackInfo">
-                    <StarsCount Count = {countStar} />
-                    <div className="fivesContainerFeedbackText">
-                        <span>
-                            {commentText}
-                            <br></br>
-                            {buttonFullText && <button onClick={fullText}>Читать дальше</button>}
-                            {buttonHideText && <button onClick={hideText}>Скрыть</button>}
-                        </span>
-                    </div>
-                    <div className="fivesContainerFeedbackProfile">
-                        <a href="/#">
-                            <img id="userPhoto" alt='' src={userImg}/>
-                            <div className="userInfo">
-                                <span id="userName">{userName}</span><br/>
-                                <span id="userResidency">{userResidency}</span>
-                            </div>
-                        </a>
+                <div className="fivesContainerFeedbackInfoWraper">
+                    <div className="fivesContainerFeedbackInfo">
+                        <div className="fivesContainerFeedbackText">
+                            <StarsCount Count = {countStar} /> 
+                            <span>
+                                {commentText}
+                                {buttonFullText && <span>...<button className ="buttonFullText" onClick={fullText}>Читать дальше</button></span>}
+                                {buttonHideText && <span>&nbsp;<button className ="buttonFullText" onClick={hideText}>Скрыть</button></span>}
+                            </span>
+                        </div>
+                        <div className="fivesContainerFeedbackProfile">
+                            <a href="/#">
+                                <img id="userPhoto" alt='' src={userImg}/>
+                                <div className="userInfo">
+                                    <span id="userName">{userName}</span><br/>
+                                    <span id="userResidency">{userResidency}</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>)

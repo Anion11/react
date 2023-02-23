@@ -8,7 +8,7 @@ import Star from "../Img/Starx3.png";
 var  arrComment = [
     {
         id: 0,
-        Stars: 0,
+        Stars: 1,
         CommentText: "Moderate children at of outweigh it. Unsatiable it considered invitation he travelling insensible. Consulted admitting oh mr up as described. Moderate children at of outweigh it. Unsatiable it considered invitation he travelling insensible. Consulted admitting oh mr up as described. Moderate children at of outweigh it. Unsatiable it considered invitation he travelling insensible. Consulted admitting oh mr up as described. Moderate children at of outweigh it. Unsatiable it considered invitation he travelling insensible. Consulted admitting oh mr up as described. Moderate children at of outweigh it. Unsatiable it considered invitation he travelling insensible. Consulted admitting oh mr up as described. Moderate children at of outweigh it. Unsatiable it considered invitation he travelling insensible. Consulted admitting oh mr up as described.",
         UserImg: User,
         userName:"Jane Cooper",
@@ -48,23 +48,32 @@ var  arrComment = [
     }
 ];
 var lastId = arrComment[arrComment.length - 1].id;
-export function switchRightComment(id)
+export function switchRightComment(comentComp)
 {
-    if(id < arrComment.length )
+    var arr = [];
+    if(comentComp[2].props.id < arrComment.length )
     {
-        var temp = arrComment.shift();
-        arrComment.push(temp);
+        for(let i = 0; i < 3; i++)
+        {
+            arr[i] = arrComment[comentComp[i].props.id + 1];
+        }
+       
     }
-    
+    return arr;
 }
-export function switchLeftComment(id)
+export function switchLeftComment(comentComp)
 {
-    if(id > 0)
+    var arr = [];
+    if(comentComp[0].props.id > 0)
     {
-        var temp = arrComment.pop();
-        arrComment.unshift(temp);
+        for(let i = 0; i < 3; i++)
+        {
+            arr[i] = arrComment[comentComp[i].props.id - 1];
+        }
     }
+    return arr;
 }
+
 export function pushComm(arr){
     var arrPush = []; 
     for(let i = 0; i < 3; i++)
@@ -76,6 +85,7 @@ export function pushComm(arr){
     }
     return arrPush;
 }
+
 export const FiveContForm = (props) => {
     const body = document.body;
     const html = document.querySelector('html')
@@ -162,7 +172,7 @@ export const FiveContForm = (props) => {
                                         userResidency : "User_residency",
                                     }
                                     arrComment.push(obj);
-                                    lastId = arrComment[arrComment.length - 1].id;
+                                    lastId = obj.id;
                                 }
                                 else{
                                     alert("Select a rating!")

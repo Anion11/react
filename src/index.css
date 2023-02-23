@@ -858,6 +858,20 @@ table tr:nth-child(4) {
 	display: inline-block;
 	margin-right: 7px;
 }
+.buttonFullText {
+	cursor: pointer;
+	border: 0px;
+	background:none;
+	font-family: 'Manrope', sans-serif;
+	font-style: normal;
+	font-weight:800;
+	font-size: 16px;
+	line-height: 28px;
+	color: #333333;
+}
+.buttonFullText:hover {
+	color: #F85A47;
+}
 .rate{
 	height: 70px;
 	display: flex;
@@ -1008,24 +1022,27 @@ table tr:nth-child(4) {
 	border: 1px solid #EBEBEB;
 	border-radius: 10px;
 	height: 100%;
+	min-height: 420px;
 }
 .fivesContainerFeedbackInfo{
-	display: grid;
-	grid-template-rows: repeat(3, auto);
-	margin: 52px 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+.fivesContainerFeedbackInfoWraper {
+	padding: 52px 0px;
 	margin-left: 38px;
 	margin-right: 72px;
-	
+	height: 100%;
 }
 .fivesContainerFeedbackText{
-	margin-top: 34px;
-	margin-bottom: 53px;
 	font-family: 'Manrope', sans-serif;
 	font-style: normal;
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 28px;
 	color: #333333;
+	flex: 1 0 auto;
 }
 
 .LeftAnimFirst-enter {
@@ -1136,9 +1153,17 @@ table tr:nth-child(4) {
 #userPhoto{
 	display: inline-block;
 }
+.fivesContainerFeedbackProfile
+{
+	flex: 0 0 auto;
+}
 .userInfo{
 	display: inline-block;
 	margin-left: 20px;
+}
+.fivesContainerFeedbackProfile 
+{
+	padding-top: 50px;
 }
 #userName{
 	font-family: 'Manrope', sans-serif;

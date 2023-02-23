@@ -5,7 +5,7 @@ import { useState } from "react";
 import { FiveContForm, arrComment, pushComm , switchRightComment , switchLeftComment, lastId} from './FiveContForm';
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { CSSTransition } from 'react-transition-group';
-var classNameRightLeft = ""
+var classNameRightLeft = "";
 export const FiveCont = () => {
     const [comments, setArrComent] = useState([])
     const [showButton, setShowButton] = useState(true);
@@ -18,6 +18,7 @@ export const FiveCont = () => {
     const nodeRef1 = useRef(null);
     const nodeRef2 = useRef(null);
     const nodeRef3 = useRef(null);
+
     useEffect(() => {
         setArrComent(pushComm(arrComment));
         setShowButton(true);
@@ -25,14 +26,13 @@ export const FiveCont = () => {
         {
             setShowButtonSwithRight(false);
         }
-    }, [])
-
+        
+    }, []);
     const buttonLeft = () => 
     { 
         setDisabledLeft(true);
         setTimeout(() =>{
-            switchLeftComment(comments[0].props.id);  
-            setArrComent(pushComm(arrComment)); 
+            setArrComent(pushComm(switchLeftComment(comments)));
             setShowButtonSwithLeft(comments[0].props.id > 1);
             setShowButtonSwithRight(comments[comments.length - 1].props.id < lastId + 1);
             if (comments[0].props.id > 1){
@@ -46,10 +46,16 @@ export const FiveCont = () => {
     const buttonRight = () => {
         setDisabledRight(true)
         setTimeout(()=>{
-            switchRightComment(comments[comments.length - 1].props.id);
-            setArrComent(pushComm(arrComment)); 
+            if(comments[comments.length - 1].props.id === lastId)
+            {
+                setShowButtonSwithRight(comments[comments.length - 1].props.id === lastId);
+            }
+            else
+            {
+                setShowButtonSwithRight(comments[comments.length - 1].props.id !== lastId - 1);
+            }
+            setArrComent(pushComm(switchRightComment(comments)));
             setShowButtonSwithLeft(comments[0].props.id >= 0);
-            setShowButtonSwithRight(comments[comments.length - 1].props.id !== lastId - 1);
             setDisabledLeft(false);
             if (comments[comments.length - 1].props.id !== lastId - 1){
                 setDisabledRight(false)
@@ -83,3 +89,4 @@ export const FiveCont = () => {
             </div>
         )
 }
+
