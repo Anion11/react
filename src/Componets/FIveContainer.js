@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import "../index.css";
 import { FiveContFooter } from './FiveContFooter';
 import { useState } from "react";
-import { FiveContForm, arrComment, pushComm , switchRightComment , switchLeftComment, lastId} from './FiveContForm';
+import { FiveContForm, arrComment, pushComm , switchRightComment , switchLeftComment, lastId, switchNo} from './FiveContForm';
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { CSSTransition } from 'react-transition-group';
 var classNameRightLeft = "";
@@ -18,7 +18,6 @@ export const FiveCont = () => {
     const nodeRef1 = useRef(null);
     const nodeRef2 = useRef(null);
     const nodeRef3 = useRef(null);
-
     useEffect(() => {
         setArrComent(pushComm(arrComment));
         setShowButton(true);
@@ -26,8 +25,14 @@ export const FiveCont = () => {
         {
             setShowButtonSwithRight(false);
         }
-        
     }, []);
+    useEffect(() => {
+        if (comments.length !== 0)
+        {
+            setDisabledRight(false)
+            setShowButtonSwithRight(comments[comments.length - 1].props.id < lastId + 1);
+        }
+    }, [lastId]);
     const buttonLeft = () => 
     { 
         setDisabledLeft(true);
@@ -45,17 +50,12 @@ export const FiveCont = () => {
     }
     const buttonRight = () => {
         setDisabledRight(true)
+        console.log("qwe")
         setTimeout(()=>{
-            if(comments[comments.length - 1].props.id === lastId)
-            {
-                setShowButtonSwithRight(comments[comments.length - 1].props.id === lastId);
-            }
-            else
-            {
-                setShowButtonSwithRight(comments[comments.length - 1].props.id !== lastId - 1);
-            }
             setArrComent(pushComm(switchRightComment(comments)));
             setShowButtonSwithLeft(comments[0].props.id >= 0);
+            setShowButtonSwithRight(comments[comments.length - 1].props.id === lastId);
+            setShowButtonSwithRight(comments[comments.length - 1].props.id !== lastId - 1);
             setDisabledLeft(false);
             if (comments[comments.length - 1].props.id !== lastId - 1){
                 setDisabledRight(false)

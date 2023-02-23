@@ -73,7 +73,18 @@ export function switchLeftComment(comentComp)
     }
     return arr;
 }
-
+export function switchNo(comentComp)
+{
+    var arr = [];
+    if(comentComp[0].props.id > 0)
+    {
+        for(let i = 0; i < 3; i++)
+        {
+            arr[i] = arrComment[comentComp[i].props.id];
+        }
+    }
+    return arr;
+}
 export function pushComm(arr){
     var arrPush = []; 
     for(let i = 0; i < 3; i++)
